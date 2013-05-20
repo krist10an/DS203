@@ -26,7 +26,7 @@ void DrawBig(int _x, int _y, int s, int ch)
 
 void UpdateChar( int nPos, bool bSel )
 {
-	char str[2] = { nPos, 0 };
+	char str[2] = { static_cast<char>(nPos), 0 };
 	int bx = nPos % 32;
 	int by = nPos / 32;
 	int x = 42 + bx*11 + ((bx >= 16) ? 4 : 0);

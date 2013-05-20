@@ -114,7 +114,6 @@ public:
 
 	virtual void OnTimer()
 	{
-		static int nLastRedraw = 0;
 		if ( HasOverlay() )
 			return;
 
@@ -122,8 +121,6 @@ public:
 
 		if ( m_bRedraw )
 		{
-			nLastRedraw = nTick;
-
 			static int nMinutes, nHours, nDay, nWDay, nMonth, nYear;
 			struct TDcfItem {
 				const char* strName;
