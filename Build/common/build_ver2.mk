@@ -28,8 +28,10 @@ ASM_OUT2 := bios.o
 
 # building for ARM on Linux platform
 
-LINUX_ARM_CFLAGS := -Wall -Os -Werror -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -MD
+LINUX_ARM_CFLAGS := -Wall -Os -Werror -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -D_VERSION2
 LINUX_ARM_AFLAGS := -mcpu=cortex-m3 -mthumb
 LINUX_ARM_LDFLAGS := -nostartfiles -mcpu=cortex-m3 -mthumb -march=armv7 -mfix-cortex-m3-ldrd -msoft-float -lc -lgcc
-LINUX_ARM_INCLUDES := -I .. -I ../Source/HwLayer/ArmM3/stm32f10x/stm32f10x/inc -I ../Source/HwLayer/ArmM3/src
-LINUX_ARM_GPPFLAGS := -Wall -Os -Werror -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -MD -D _ARM -fno-exceptions -fno-rtti 
+LINUX_ARM_INCLUDES := -I ../.. -I ../../Source/HwLayer/ArmM3/stm32f10x/inc -I ../../Source/HwLayer/ArmM3/src
+LINUX_ARM_GPPFLAGS := -Wall -Os -Werror -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -D _ARM -fno-exceptions -fno-rtti -fno-threadsafe-statics -Wno-psabi -D_VERSION2
+
+LINKERFILE=../../Source/HwLayer/ArmM3/lds/app1.lds

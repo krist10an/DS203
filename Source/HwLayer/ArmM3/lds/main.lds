@@ -56,7 +56,7 @@ SECTIONS
     .  = 0x0;          /* From 0x00000000 */
 
     .bios 0x08004200 (NOLOAD) : {
-      ../../Bin/BIOS.o
+      BIOS.o
     }
 /*
     .cbiosram : {
