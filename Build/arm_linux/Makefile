@@ -16,7 +16,8 @@ OBJDUMP =$(CROSS)objdump
 LD      =$(CROSS)ld
 AS      =$(CROSS)as
 SIZE    =$(CROSS)size
-MKDIR   =mkdir -p
+
+OS      ?= linux
 
 # Include source file definitions
 include ../common/build.mk

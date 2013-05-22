@@ -24,6 +24,8 @@ LINKERFILE ?=$(error Required parameter LINKERFILE missing)
 ASM_SRCS   ?=$(error Required parameter ASM_SRCS missing)
 C_SRCS     ?=$(error Required parameter C_SRCS missing)
 CPP_SRCS   ?=$(error Required parameter CPP_SRCS missing)
+OS         ?=$(error Required parameter OS missing)
+
 
 # Messages
 MSG_C    = "CC      $<"
@@ -70,8 +72,13 @@ clean:
 # Generate output folders if they don't exist
 folders:
 	@echo $(MSG_MKDIR)
-	$(Q)$(MKDIR) $(OBJDIR)
-	$(Q)$(MKDIR) $(TARGETDIR)
+ifeq ($(OS), windows)
+	$(Q)mkdir $(subst /,\\,$(OBJDIR))
+	$(Q)mkdir $(subst /,\\,$(TARGETDIR))
+else
+	$(Q)mkdir -p $(OBJDIR)
+	$(Q)mkdir -p $(TARGETDIR)
+endif
 
 # Targets that are not real files
 .PHONY: clean lib elf hex bin lss folders
