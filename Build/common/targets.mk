@@ -72,15 +72,7 @@ clean:
 # Generate output folders if they don't exist
 folders: $(TARGETDIR) $(OBJDIR)
 
-$(OBJDIR):
-	@echo $(MSG_MKDIR)
-ifeq ($(OS), windows)
-	$(Q)mkdir $(subst /,\\,$@)
-else
-	$(Q)mkdir -p $@
-endif
-
-$(TARGETDIR):
+$(OBJDIR) $(TARGETDIR):
 	@echo $(MSG_MKDIR)
 ifeq ($(OS), windows)
 	$(Q)mkdir $(subst /,\\,$@)
