@@ -36,7 +36,7 @@ MSG_COPY = "OBJCOPY $< $@"
 MSG_RM   = "RM      $(OBJDIR)/*.o,*.d $(TARGET).*"
 MSG_SIZE = "SIZE    $@"
 MSG_DUMP = "OBJDUMP $@"
-MSG_MKDIR= "MKDIR   $(OBJDIR) $(TARGETDIR)"
+MSG_MKDIR= "MKDIR   $@"
 
 # Generate list of source files and objects
 # Need to add a ../ to be compatible with build.mk
@@ -70,14 +70,22 @@ clean:
 	$(Q)rm -rf $(TARGET).*
 
 # Generate output folders if they don't exist
-folders:
+folders: $(TARGETDIR) $(OBJDIR)
+
+$(OBJDIR):
 	@echo $(MSG_MKDIR)
 ifeq ($(OS), windows)
-	$(Q)mkdir $(subst /,\\,$(OBJDIR))
-	$(Q)mkdir $(subst /,\\,$(TARGETDIR))
+	$(Q)mkdir $(subst /,\\,$@)
 else
-	$(Q)mkdir -p $(OBJDIR)
-	$(Q)mkdir -p $(TARGETDIR)
+	$(Q)mkdir -p $@
+endif
+
+$(TARGETDIR):
+	@echo $(MSG_MKDIR)
+ifeq ($(OS), windows)
+	$(Q)mkdir $(subst /,\\,$@)
+else
+	$(Q)mkdir -p $@
 endif
 
 # Targets that are not real files
